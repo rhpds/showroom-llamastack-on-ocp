@@ -1,41 +1,23 @@
 = Level 5: Agentic and MCP
 
-This level demonstrates the integration of intelligent agents with OpenShift and Slack environments through Multi-Cluster Platform (MCP) tools, enabling real-time interaction and automation of operational tasks.
+In this notebook, we will be building an advanced agent using Llama Stack that interacts with multiple external MCP tools.
 
-== Focus
+== Learning Objectives
 
-This notebook demonstrates the exciting integration of our intelligent agent with the operational realities of our OpenShift and Slack environments through the utilization of MCP (Multi-Cluster Platform) tools. This integration unlocks the potential for real-time interaction and the automation of critical operational tasks, bridging the gap between intelligent analysis and direct action within our infrastructure. We will explore how the agent can leverage various levels of OpenShift interaction, from basic status checks to the creation and management of resources, and how it can seamlessly communicate findings and updates via Slack, fostering better collaboration and faster incident resolution.
+* *Understand how to build and utilize agents that can interact directly with any external system by leveraging MCP tools.*
 
-== Learning Objective
+== Slack Pre-Requisite
 
-Understand how to build and utilize agents that can interact directly with OpenShift and Slack using MCP tools. Developers will learn how to leverage these tools to query cluster state, manage resources, analyze logs, and communicate with teams, automating common operational workflows and improving efficiency.
+We will be interacting with a Slack MCP server in this notebook for which you will need to join the public Slack channel workspace using this invite link: https://join.slack.com/t/octo-emerging-tech/shared_invite/zt-35pmx4q0i-OFwWNE6nIcPEmbM7YS55yg
 
-== Task Example
+Once logged into the workspace make sure to join the link:https://app.slack.com/client/T08M9UTL2DC/C08MUDSNHED[#demos] channel.
 
-* *OpenShift Interaction:* "Check the current status of my OpenShift cluster. If the cluster is reported as 'Ready', proceed to create a new pod named 'test-pod' within the 'dev' namespace." This showcases the agent's ability to conditionally execute actions based on the observed state of the OpenShift environment.
+== Run Notebook 5
 
-* *Log Analysis and Slack Notification:* "Review the OpenShift logs for the pod named 'slack-test'. Categorize each log entry as either 'Normal' or 'Error'. If any log entries are categorized as 'Error', immediately send a detailed Slack message to the '#ops-team' channel, including the error messages and the timestamp of their occurrence. If no errors are found, provide a concise summary of the log analysis." This highlights the agent's capability to analyze operational data and trigger appropriate communication based on the findings.
+To run this notebook, please select `Level5_agents_and_mcp.ipynb` from the file browser.
 
-== Expected Agent Behavior
+image::../assets/images/Level5_intro.png[Level 5 - Agentic and MCP]
 
-The agent, equipped with the necessary MCP tools for OpenShift and Slack, will:
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
 
-1. *For the first task:* Authenticate and connect to the specified OpenShift cluster. Execute commands to retrieve the cluster's status. Based on the status, it will either confirm the cluster is running or report its current state. If running, it will then proceed to create a new pod with the specified name and namespace, reporting the outcome of the creation attempt.
-
-2. *For the second task:* Access and retrieve the logs for the specified pod. It will then process each log entry, applying logic to categorize it as 'Normal' or 'Error'. If any 'Error' entries are identified, the agent will format a message containing the error details and send it to the designated Slack channel. If no errors are found, it will generate and output a brief summary of the log review.
-
-== Key Concepts Demonstrated
-
-* *MCP Tool Integration:* Seamlessly connecting the intelligent agent framework with MCP tools for OpenShift and Slack.
-
-* *Real-time OpenShift Interaction:* Demonstrating the ability to programmatically query and manage OpenShift resources.
-
-* *Automated Workflow Execution:* Combining analysis and action to automate operational tasks based on specific conditions.
-
-* *Slack Communication:* Utilizing Slack tools to send notifications and updates to relevant teams, improving collaboration and awareness.
-
-* *Conditional Logic in Operations:* Implementing logic that allows the agent to make decisions and execute different actions based on the state of the environment or the results of analysis.
-
-* *Error Detection and Alerting:* Automating the process of identifying errors in logs and proactively notifying the appropriate teams.
-
-image::level5.png[Level 5 - Agentic and MCP]
+image::../assets/images/run_notebook.png[Run Notebook]
