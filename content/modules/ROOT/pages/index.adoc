@@ -1,45 +1,97 @@
-= LlamaStack on OpenShift
+= Llama Stack on OpenShift Lab
+This lab provides a comprehensive, hands-on experience developing intelligent AI agents with OpenShift, Llama Stack and Model Context Protocol (MCP). Participants will learn how to build agents that can use a wide variety of tools to increase their access to different data sources and interact with external systems. This will be done by building an AI agent that has access to a RAG tool, an OpenShift MCP and a Slack MCP tool. This agent will be capable of reviewing pod logs, searching our vector database for specific solutions, and sending results to Slack. This agent will be built, step-by-step through a series of progressive Jupyter notebooks on Red Hat OpenShift AI (RHOAI).
 
-== Welcome to the LlamaStack on OpenShift Workshop
+== Objectives
 
-This lab aims to provide a comprehensive, hands-on experience in developing intelligent AI agents with OpenShift, Llama Stack and MCP (Model Context Protocol). Through a progressive series of Jupyter notebooks, participants will learn to build agents capable of utilizing both internal knowledge bases and external web resources, as well as interacting directly with a live OpenShift environment.
 
-== Lab Objectives
+* Learn how to use Retrieval Augmented Generation (RAG) with Llama Stack for information retrieval from custom data sources.
+* Develop agents with the ability to use a wide array of tools that will expand their capabilities and tailor them to specific domains.
+* Explore advanced agentic patterns, like prompt chaining and the ReAct framework for complex reasoning and decision-making.
+* Integrate RAG, AI agents, and Model Context Protocol (MCP) to build sophisticated automated systems, such as an incident response system within OpenShift.
 
-Master the basics of Retrieval-Augmented Generation (RAG) using LlamaStack for information retrieval from custom data sources.
-Develop agents with the capability to utilize external tools like web search to gather a wider range of information.
-Explore advanced agentic capabilities, including location awareness, prompt chaining, and the ReAct framework for complex reasoning and decision-making.
-Integrate RAG, prompt chaining, and MCP tools to build sophisticated automated systems, such as incident response systems within OpenShift.
-Gain practical experience in interacting with and managing OpenShift environments through intelligent agents, automating operational tasks.
-Learn how to leverage agents for effective communication and task automation within platforms like Slack, using MCP tools.
+== Environment - Red Hat OpenShift AI
 
-== Lab Structure
 
-The lab is structured as a series of Jupyter notebooks that progressively increase in complexity:
+For this lab, we built notebooks running in a Red Hat OpenShift AI (RHOAI) environment. RHOAI is a comprehensive, flexible, and scalable platform engineered to support the full lifecycle of AI and ML application development and deployment. Built upon the enterprise-grade Kubernetes foundation of Red Hat OpenShift, it provides a consistent and robust environment for data scientists, developers, and MLOps engineers to collaborate. RHOAI facilitates a wide array of tasks including data acquisition and preparation, model training and fine-tuning, model serving, and ongoing monitoring, all while supporting hardware acceleration to optimize performance.  
+The platform is designed to streamline AI/ML workflows and accelerate the delivery of AI-powered intelligent applications across hybrid cloud environments, encompassing on-premises, public cloud, and edge deployments. By integrating a suite of tested and supported open-source AI/ML tools and frameworks, such as Jupyter notebooks, Model Registry, Training Operator and PyTorch, alongside capabilities for managing AI accelerators like GPU, RHOAI aims to reduce operational complexity. This allows teams to focus on innovation and efficiently build, scale, and manage their AI models and applications with enhanced security and consistency.
 
-Level 0: Environment setup and necessary Python package installations.
+For this lab, an OpenShift environment will be deployed for you with the following components:
+
+
+* RHOAI
+    ** vLLM Model Servers 
+        *** IBM Granite 3.2 8B Instruct 
+        *** Meta LLama 3.2 3B Instruct
+    ** Workbench
+        *** Jupyter notebooks levels 1-6
+* Llama Stack server
+* MCP servers
+    ** OpenShift
+    ** Slack
+
+== RHOAI model deployment via vLLM 
+
+RHOAI model deployment makes LLMs accessible as scalable and manageable API endpoints. This enables developers and data scientists to integrate these models with LLama Stack applications. For our lab, we use https://docs.vlslm.ai/[vLLM] as a runtime for RHOAI model deployment. vLLM is an open-source, high-performance inference engine designed to optimize the deployment of large language models (LLMs) in real-time applications. At its core, vLLM introduces the PagedAttention algorithm, which draws inspiration from operating system paging techniques to manage key-value (KV) cache memory efficiently.
+
+=== Models
+
+For this lab, we deploy two LLM models:
+
+* IBM Granite 3.2 8B Instruct:  is an 8-billion-parameter, long-context AI model fine-tuned for thinking capabilities. Built on top of Granite-3.1-8B-Instruct, it has been trained using a mix of permissively licensed open-source datasets and internally generated synthetic data designed for reasoning tasks. The model allows controllability of its thinking capability, ensuring it is applied only when required.
+* Meta LLama 3.2 3B Instruct: The Llama 3.2 collection of multilingual large language models (LLMs) is a collection of pretrained and instruction-tuned generative models in 1B and 3B sizes (text in/text out). The Llama 3.2 instruction-tuned text only models are optimized for multilingual dialogue use cases, including agentic retrieval and summarization tasks. They outperform many of the available open source and closed chat models on common industry benchmarks.
+
+We use the IBM Granite 3.2 8B Instruct model as a default in all the notebooks for a consistent performance. However, you can also experiment and try out the Meta LLama 3.2 3B Instruct model to compare the performance and characteristics of both the models.
+
+== Llama Stack Server
+https://github.com/meta-llama/llama-stack[Llama Stack] is a comprehensive, open-source framework started at Meta, designed to streamline the creation, deployment, and scaling of generative AI applications. It provides a standardized set of tools and APIs that encompass the entire AI development lifecycle, including inference, fine-tuning, evaluation, safety protocols, and the development of agentic systems capable of complex task execution. By offering a unified interface, Llama Stack aims to simplify the often complex process of integrating advanced AI capabilities into various applications and infrastructures.  
+The core purpose of Llama Stack is to empower developers by reducing friction and complexity, allowing them to focus on building innovative and transformative AI solutions. It codifies best practices within the generative AI ecosystem, offering pre-built tools and support for features like tool calling and retrieval augmented generation (RAG). This standardization facilitates a more consistent development experience, whether deploying locally, on-premises, or in the cloud, and fosters greater interoperability within the rapidly evolving generative AI community. Ultimately, Llama Stack seeks to accelerate the adoption and advancement of generative AI by providing a robust and accessible platform for developers of all sizes.
+
+=== Built-in Tools with Llama Stack
+
+Llama Stack provides built-in tools to extend the capabilities of agents. We leverage the following built-in tools in this lab:
+
+*RAG*
+The Llama Stack https://llama-stack.readthedocs.io/en/latest/building_applications/rag.html[RAG] tool facilitates document ingestion and semantic search using vector databases such as Milvus and FAISS. It supports ingesting documents from various sources like URLs and files, automatically chunking them for processing. For semantic search in this demo, the tool utilizes the all-MiniLM-L6-v2 model to embed the document chunks.
+
+*Websearch*
+The https://llama-stack.readthedocs.io/en/latest/building_applications/tools.html#web-search-providers[WebSearch] tool enables agents to conduct web searches using providers like Brave, Bing, and Tavily. This tool requires an API key from the selected search provider. Our demos utilizes Tavily Search and a Tavily API key to gather real time information.
+
+== Model Context Protocol Servers
+
+The open-source https://modelcontextprotocol.io/introduction[Model Context Protocol] defines a standard way to connect LLMs to nearly any type of external resources like files, APIs, and databases. It’s built on a client-server system, so applications can easily feed LLMs the context they need.
+
+=== Servers
+In this lab, we use two MCP servers, an OpenShift MCP server and a Slack MCP server, both of which are deployed in the OpenShift environment.
+
+*OpenShift MCP Server*
+
+The https://github.com/manusa/kubernetes-mcp-server[OpenShift Model Context Protocol (MCP) Server] lets LLMs interact directly with Kubernetes and OpenShift clusters without needing additional software like kubectl or Helm. It enables operations such as managing pods, viewing logs, installing Helm charts, listing namespaces, etc.—all through a unified interface. This server is lightweight and doesn't require any external dependencies, making it easy to integrate into existing systems. In the advanced level notebooks, we use this server to connect to the OpenShift cluster, check the status of pods running on the cluster, and report their health and activity.
+
+*Slack MCP Server*
+
+The https://github.com/modelcontextprotocol/servers/tree/main/src/slack[Slack MCP Server]` offers a standard interface for LLMs to interact with Slack workspaces. Its capabilities include listing channels, posting messages, replying to threads, adding emoji reactions, retrieving message history, and accessing user profiles. This enables AI agents to seamlessly engage in Slack conversations, manage communication, and gain insights from user context.  In the advanced level notebooks, we use this server to connect to a public Slack workspace and send status updates about our running pods, along with error resolution steps.
+
+== Demo notebooks in RHOAI workbench
+
+The lab includes a series of https://jupyter.org/[Jupyter notebooks] that run in a RHOAI workbench in the `llama-serve` project. The notebooks progressively increase in complexity to help guide participants from defining a “Simple RAG” application with Llama Stack all the way to building an Agent that integrates MCP and RAG tools with advanced agent patterns.
+
+Level 0 - Environment setup.
+
 Level 1 - Simple RAG: Introduction to basic RAG principles for information retrieval from internal documents.
-Level 2  - Simple Agent with Web Search: Building agents that can use external web search for information gathering.
-Level 3 - Advanced Agents with Prompt Chaining ReAct: Implementing location awareness, prompt chaining, and the ReAct framework for more complex decision-making processes.
-Level 4 - RAG Agent: Strategically integrating RAG as a tool within the agent's decision-making process.
-Level 5 - Agents and MCP: Utilizing MCP tools to interact with OpenShift and Slack for operational automation and communication.
-Level 6 - Agents, MCP and RAG: Combining prompt chaining, RAG, and MCP tools to develop a complete, automated incident response system.
 
-This lab will empower participants to construct and deploy AI agents capable of navigating intricate tasks, retrieving relevant information from multiple sources, and automating operational workflows within an enterprise-grade OpenShift environment.
+Level 2  - Simple Agent with Web Search: Build an agent that can use web search for additional information gathering.
 
-== Lab Environment
+Level 3 - Advanced Agents with Prompt Chaining ReAct: Implement location awareness, prompt chaining, and use the ReAct pattern to build agents with more complex decision-making capabilities.
 
-The lab environment is pre-configured with all necessary components, including:
+Level 4 - RAG Agent: Strategically integrate RAG as a tool within the agent's decision-making process.
 
-* Red Hat OpenShift Container Platform
-* OpenShift AI
-* GPU-enabled nodes for model inference
-* Pre-loaded LLM models
-* JupyterLab workbench environment
+Level 5 - Agents and MCP: Utilize MCP tools to interact with OpenShift and Slack for operational automation and communication.
 
-== Models used in this lab
+Level 6 - Agents, MCP and RAG: Combine advanced agentic patterns, RAG, and MCP tools to develop a complete, automated incident response system.
 
-* Granite32-8b
-* Llama32-3b
+This lab will teach participants how to build AI agents capable of navigating intricate tasks, retrieving relevant information from multiple sources, and automating operational workflows within an enterprise-grade OpenShift environment.
 
-Start with the first module to begin exploring the capabilities of LlamaStack on OpenShift!
+== Feedback
+
+If you have any feedback on this demo series we'd love to hear it! Please go to https://www.feedback.redhat.com/jfe/form/SV_8pQsoy0U9Ccqsvk and help us improve our demos.
+
