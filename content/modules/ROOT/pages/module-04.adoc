@@ -1,35 +1,19 @@
-= Level 3: Advanced Agentic with Prompt Chaining & ReAct
+= Level 3: Advanced Agents with Prompt Chaining & ReAct
 
-This level introduces sophisticated agent behaviors including location awareness, prompt chaining, and the ReAct framework for structured reasoning and action.
+In this notebook, we will be using Llama Stack to build an advanced agent with prompt chaining and ReAct functionalities.
 
-== Focus
+== Learning Objectives
 
-This notebook takes the next significant step in agent evolution. Building upon the foundational tool usage demonstrated previously, it introduces several key advancements that enable more sophisticated and context-aware behavior. We delve into incorporating location awareness as a critical environmental input, showcasing how the agent can understand and react to its surroundings. Furthermore, this level highlights the power of prompt chaining, where the output of one prompt serves as the input for the next, allowing for complex, multi-step reasoning processes to be orchestrated. Finally, we introduce the ReAct framework (Reason + Act), a powerful paradigm that structures the agent's thought process into explicit reasoning steps followed by concrete actions, leading to more interpretable and reliable outcomes.
+* *Understand how to build agents that are capable of complex reasoning through prompt chaining*
+* *Employ the ReAct framework for structured action planning*
+* *Learn how to integrate effective prompt chains for multi-turn interactions*
 
-== Learning Objective
+== Running Notebook 3
 
-Understand how to build agents that are location-aware, capable of complex reasoning through prompt chaining, and employ the ReAct framework for structured action planning. Developers will learn how to integrate location services, design effective prompt chains for multi-turn interactions, and implement the ReAct methodology to guide the agent's decision-making process.
+To run this notebook, please select `Level3_advanced_agent_with _Prompt_Chaining_and_ReAct.ipynb` from the file browser.
 
-== Task Example
+image::../assets/images/Level3_intro.png[Level 3: Advanced Agents with Prompt Chaining & ReAct]
 
-A developer asks, "Are there any weather-related risks in my area that could disrupt network connectivity or system availability, and if so, what are the potential impacts on our OpenShift clusters?"
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
 
-== Expected Agent Behavior
-
-1. *Reasoning (ReAct):* The agent first recognizes the need for both location information and weather data.
-2. *Action (ReAct):* It invokes the `get_location` client tool to determine the current geographic coordinates.
-3. *Reasoning (ReAct):* Based on the location, the agent formulates a targeted query for the `web_search_tool` to retrieve relevant weather information (e.g., "severe weather alerts near [latitude],[longitude]").
-4. *Action (ReAct):* The agent executes the web search and processes the results.
-5. *Reasoning (Prompt Chaining & ReAct):* If weather risks are identified (e.g., high winds, heavy rain), the agent utilizes prompt chaining to formulate a new prompt: "Given the following weather conditions: [weather details], what are the potential risks to network connectivity and OpenShift cluster availability?".
-6. *Action (ReAct):* The agent processes the output of the prompt chain to identify potential impacts.
-7. *Final Output:* The agent synthesizes a response that includes the identified weather risks, their potential impact on network and cluster availability, and possibly suggests proactive measures.
-
-== Key Concepts Demonstrated
-
-* *Location Awareness:* Utilizing tools to understand and incorporate the agent's geographic context.
-* *Prompt Chaining:* Building complex reasoning flows by sequentially applying prompts and leveraging intermediate results.
-* *ReAct Framework:* Structuring the agent's thought process into explicit reasoning and action steps for improved transparency and reliability.
-* *Integration of Multiple Tools:* Orchestrating the use of different tools (web search, location services) to address a complex query.
-* *Contextual Understanding:* Maintaining context across multiple steps to provide a comprehensive answer.
-
-image::level3.png[Level 3: Advanced Agentic with Prompt Chaining & ReAct]
+image::../assets/images/run_notebook.png[Run Notebook]
