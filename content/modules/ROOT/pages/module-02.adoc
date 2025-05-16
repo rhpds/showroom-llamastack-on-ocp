@@ -1,28 +1,21 @@
 = Level 1 - Simple RAG
 
-This level introduces the fundamental principles of Retrieval-Augmented Generation (RAG) using LlamaStack for information retrieval from custom knowledge sources.
+In this notebook we will be using Llama Stack to run a simple RAG example.
 
-== Focus
+== Learning Objectives
 
-This notebook introduces the fundamental principles of Retrieval-Augmented Generation (RAG). It clearly demonstrates how to leverage the LlamaStack framework to access and retrieve information from internal knowledge repositories. The primary goal is to show how the system can answer user questions by intelligently searching and extracting relevant details from existing documents. This forms the bedrock for more advanced agent capabilities.
+*Understand the core mechanics of RAG and Vector Databases in LlamaStack.*
 
-== Learning Objective
-
-Understand the core mechanics of RAG using LlamaStack for information retrieval from custom sources.
-
-== Task Example
-
-A user asks, "Explain the step-by-step process for installing OpenShift, referencing the official installation guide PDF."
-
-== Expected Agent Behavior
-
-The agent will utilize the RAG component to search our internal document store, locate the OpenShift installation guide, extract the relevant sections detailing the installation process, and then present a summarized explanation back to the user, citing the guide as its source.
-
-== Key Concepts Demonstrated
-
-* *Knowledge Base Interaction:* Connecting to and querying internal documents.
+* *Vector Database Interaction*: How to connect to a vector database, insert documents and submit queries. 
 * *Retrieval Mechanism:* How LlamaStack identifies and extracts relevant information.
-* *Basic Question Answering:* Using retrieved content to directly answer user queries.
-* *Contextual Awareness (Limited):* Focusing solely on information within the provided documents.
+* *Basic Question Answering:* Using retrieved content in conjunction with inference to generate dataset specific answers.
 
-image::level1.png[Level 1 - Simple RAG]
+== Run Notebook 1
+
+To run this notebook, please select `Level1_simple_RAG.ipynb` from the file browser.
+
+image::Level1_intro.png[Level 1 - Simple RAG]
+
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
+
+image::run_notebook.png[Run Notebook]
