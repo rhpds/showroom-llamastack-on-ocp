@@ -1,29 +1,19 @@
 = Level 2: Simple Agent with Web Search
 
-This level introduces the concept of an agent capable of using external tools, particularly web search, to expand beyond internal knowledge repositories.
+In this notebook, we will be building a simple web search agent using Llama Stack.
 
-== Focus
+== Learning Objectives
 
-This notebook marks the exciting transition from purely internal knowledge retrieval to interacting with the vast resources of the internet. It introduces the fundamental concepts of an "agent" – a system capable of using "tools" to achieve a goal. Here, the primary tool is web search, allowing the agent to go beyond our internal documentation and gather information from the wider web. This opens up possibilities for answering a broader range of questions, especially those concerning the latest developments and publicly available information.
+* *Understand how to equip an agent* with Llama Stack’s built-in tools, specifically web search
+* *Utilize tools to fulfill user requests*
+* *Grasp the basic architecture of an agent framework and the concept of tool invocation*
 
-== Learning Objective
+== Run Notebook 2
 
-Understand how to equip an agent with external tools, specifically web search, and how it utilizes these tools to fulfill user requests. Grasp the basic architecture of an agent framework and the concept of tool invocation.
+To run this notebook, please select `Level2_simple_agent_with_websearch.ipynb` from the file browser.
 
-== Task Example
+image::../assets/images/Level2_intro.png[Level 2 - Simple Agent with websearch]
 
-A developer asks, "What are the key new features announced in the most recent OpenShift release?"
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
 
-== Expected Agent Behavior
-
-The agent, recognizing that this information likely resides on Red Hat's official website or relevant tech news sites, will invoke its web search tool. It will formulate appropriate search queries (e.g., "latest OpenShift release features", "OpenShift new capabilities") and process the search results. The agent will then synthesize a concise summary of the key new features based on the retrieved information, potentially providing links to the original sources.
-
-== Key Concepts Demonstrated
-
-* *Agent Framework Basics:* Introduction to the core components of an intelligent agent.
-* *Tool Integration:* How to connect and utilize external capabilities (like web search).
-* *External Data Acquisition:* Accessing and processing information from the internet.
-* *Information Synthesis:* Combining information from multiple sources into a coherent answer.
-* *Handling Information Beyond Internal Knowledge:* Expanding the scope of questions the system can answer.
-
-image::level2.png[Level 2 - Simple Agent with Web Search]
+image::../assets/images/run_notebook.png[Run Notebook]
