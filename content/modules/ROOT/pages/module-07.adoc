@@ -1,50 +1,26 @@
 = Level 6: Agentic MCP and RAG
 
-This level represents the culmination of our efforts, combining prompt chaining, RAG, and MCP tools into a comprehensive and automated incident response system.
+In this notebook, we will be building an advanced agent that interacts with multiple tools including external MCP tools and the built-in Llama Stack RAG tool.
 
-== Focus
+== Learning Objectives
 
-This notebook represents the culmination of our efforts, showcasing a comprehensive and automated incident response flow. It elegantly integrates several powerful techniques: prompt chaining for orchestrating multi-step reasoning, Retrieval-Augmented Generation (RAG) for accessing and leveraging our internal knowledge base to find solutions, and Multi-Cluster Platform (MCP) tools for direct interaction with our OpenShift environment and seamless communication via Slack. This level demonstrates how we can build truly intelligent agents capable of not just identifying problems but also proactively finding and suggesting solutions, and then informing the relevant teams, all with minimal human intervention.
+* *Understand how to combine advanced agentic capabilities* including prompt chaining, RAG-based knowledge retrieval, and MCP-driven OpenShift and Slack interactions, into a cohesive incident response system.
+* *Learn how to design prompts that guide the agent through complex tasks* 
+* *Learn how to leverage RAG to inject relevant contextual information for problem-solving* 
+* *Learn how to utilize MCP tools to execute actions within our infrastructure and communicate findings effectively.*
 
-== Learning Objective
+== Slack Pre-Requisite
 
-Understand how to combine advanced agentic capabilities, including prompt chaining, RAG-based knowledge retrieval, and MCP-driven OpenShift and Slack interactions, into a cohesive incident response system. Developers will learn how to design prompts that guide the agent through complex tasks, how to leverage RAG to inject relevant contextual information for problem-solving, and how to utilize MCP tools to execute actions within our infrastructure and communicate findings effectively.
+We will be interacting with a Slack MCP server in this notebook for which you will need to join the public Slack channel workspace using this invite link: https://join.slack.com/t/octo-emerging-tech/shared_invite/zt-35pmx4q0i-OFwWNE6nIcPEmbM7YS55yg
 
-== Task Example
+Once logged into the workspace make sure to join the link:https://app.slack.com/client/T08M9UTL2DC/C08MUDSNHED[#demos] channel.
 
-"Investigate the logs for the 'web-app' pod within the 'production' OpenShift namespace, categorizing each log entry as either 'Normal' or 'Error'. If any 'Error' entries are detected, search our internal documentation for potential causes and solutions related to these specific errors, providing a summarized explanation of the likely root cause and the recommended steps to remediate the issue. Finally, generate a concise summary including the pod name, the categorization of the log entries, a brief explanation for the categorization, and the identified next steps for remediation, and then post this summary to the '#production-alerts' channel on Slack."
+== Run Notebook 6
 
-== Expected Agent Behavior
+To run this notebook, please select `Level6_agents_MCP_and_RAG.ipynb` from the file browser.
 
-The agent, equipped with sophisticated prompt processing, RAG capabilities connected to our internal knowledge base, and MCP tools for OpenShift and Slack, will:
+image::../assets/images/Level6_intro.png[Level6 - agents_MCP_and_RAG]
 
-1. *Log Analysis:* Access and retrieve the logs for the specified pod within the designated OpenShift namespace using MCP tools. It will then analyze each log entry, applying predefined criteria to categorize it as either 'Normal' or 'Error', effectively identifying potential issues.
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
 
-2. *Solution Retrieval (RAG):* Upon identifying any 'Error' log entries, the agent will formulate a query based on the error messages and utilize the RAG component to search our internal documentation (e.g., runbooks, troubleshooting guides, past incident reports) for relevant information, potential root causes, and recommended solutions.
-
-3. *Reasoning and Summarization (Prompt Chaining):* The agent will then use prompt chaining to synthesize the information gathered from the log analysis and the RAG results. It will generate a summary that includes:
-   * The name of the pod being investigated.
-   * The total number of 'Normal' and 'Error' log entries.
-   * A brief explanation of why certain log entries were categorized as 'Error'.
-   * A concise summary of the likely root cause of the errors, based on the RAG results.
-   * A clear and actionable list of the next steps to take to remediate the identified issue.
-
-4. *Slack Notification (MCP):* Finally, the agent will leverage MCP tools to format and send this comprehensive summary as a message to the specified '#production-alerts' channel on Slack, ensuring that the relevant team is promptly informed about the issue and the recommended steps for resolution.
-
-== Key Concepts Demonstrated
-
-* *End-to-End Incident Response Automation:* Showcasing the ability to automate the entire process from issue detection to solution proposal and team notification.
-
-* *Advanced Prompt Chaining:* Orchestrating a sequence of prompts to guide the agent through complex reasoning, information retrieval, and summarization tasks.
-
-* *Intelligent RAG Integration for Problem Solving:* Demonstrating how RAG can be used not just for answering general questions but for actively finding solutions to specific operational issues based on internal knowledge.
-
-* *Seamless MCP Tool Utilization:* Integrating OpenShift log retrieval and Slack messaging within a single automated workflow.
-
-* *Contextual Awareness Across Multiple Stages:* Maintaining context as the agent moves from log analysis to knowledge retrieval and finally to summarizing and reporting.
-
-* *Proactive Problem Resolution:* Enabling the agent to not only identify errors but also suggest concrete steps for fixing them.
-
-* *Improved Team Collaboration and Communication:* Automating the process of informing the right teams about critical issues and potential solutions.
-
-image::level6.png[Level 6: Agentic MCP and RAG]
+image::../assets/images/run_notebook.png[Run Notebook]
