@@ -1,32 +1,18 @@
 = Level 4: Agentic RAG
 
-This level demonstrates the powerful combination of autonomous agents with Retrieval-Augmented Generation (RAG), enabling intelligent decision-making about when and how to leverage internal knowledge bases.
+In this notebook we will be building a RAG agent using Llama Stack.
 
-== Focus
+== Learning Objectives
 
-This notebook represents a significant step forward by merging the strengths of autonomous agents with Retrieval-Augmented Generation (RAG). Here, the agent isn't just passively retrieving information; it gains the intelligence to *decide* when consulting internal knowledge bases is the most appropriate action. This strategic decision-making process allows for more efficient and contextually relevant responses. By integrating agentic capabilities, the system can proactively analyze user queries and determine if the answer lies within our curated internal documentation before potentially resorting to broader searches or other actions.
+* *Understand how to define and implement Retrieval Augmented Generation (RAG) within an AI agent framework*
+* *How to enable agents to autonomously decide when to use RAG and when to answer questions directly*
 
-== Learning Objective
+== Run Notebook 4
 
-Understand how to construct agents that can intelligently integrate RAG as a tool within their decision-making framework. Developers will learn how to define conditions and logic that enable the agent to assess whether a user's query can be best answered by leveraging internal knowledge through RAG. This involves understanding how to trigger the RAG component based on the nature and context of the query.
+To run this notebook, please select `Level4_RAG_Agent.ipynb` from the file browser.
 
-== Task Example
+image::../assets/images/Level4_intro.png[Level 4 - Agentic RAG]
 
-A developer asks, "What are the recommended security best practices for configuring network policies in OpenShift according to our internal security guidelines?"
+To execute the notebook cells, navigate to the top toolbar. Click the fast-forward (⏩) icon to restart the kernel and execute all cells sequentially from top to bottom.
 
-== Expected Agent Behavior
-
-1. *Analysis:* The agent analyzes the user's query and identifies keywords related to "security best practices," "network policies," and "internal security guidelines."
-2. *Decision:* Based on this analysis, the agent recognizes that the answer likely resides within the organization's internal security documentation.
-3. *Action (RAG):* The agent invokes the RAG component, specifically targeting relevant sections of the internal knowledge base related to OpenShift security and network policies.
-4. *Retrieval:* The RAG system retrieves the most pertinent information from the internal documents.
-5. *Synthesis:* The agent synthesizes a comprehensive answer based on the retrieved information, outlining the recommended security best practices. It will likely cite the internal documentation as the source of its recommendations.
-
-== Key Concepts Demonstrated
-
-* *Intelligent Tool Selection:* The agent's ability to choose RAG as the appropriate tool based on the user's query.
-* *Contextual Awareness for Tool Usage:* Understanding the context of the question to determine the relevance of internal knowledge.
-* *Seamless Integration of Agent and RAG Components:* How the agent framework orchestrates the use of the RAG system.
-* *Prioritizing Internal Knowledge:* Demonstrating the value of leveraging curated internal resources for specific types of queries.
-
-image::level4.png[Level 4 - Agentic RAG]
+image::../assets/images/run_notebook.png[Run Notebook]
