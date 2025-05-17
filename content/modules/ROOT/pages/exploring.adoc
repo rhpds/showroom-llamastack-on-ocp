@@ -1,53 +1,56 @@
-= Exploring the lab
+= Exploring the Lab
 
-== Exploring the lab
-The lab is designed to be interactive and hands-on, allowing you to explore the capabilities of LlamaStack and OpenShift AI in a practical setting. The lab environment is pre-configured with all necessary components, so you can focus on learning and experimentation without worrying about setup or configuration issues.
+== OpenShift Console 
 
-=== Exploring the nodes
-The lab environment consists of multiple nodes but the important ones to observe are the GPU nodes. In the OpenShift web console perform the following steps to view the nodes:
+Log in to the cluster: Navigate to the OpenShift cluster and login with the provided credentials. 
 
-1. In the OpenShift web console, navigate to **Compute** > **Nodes**.
-2. Click Roles to filter the nodes by role.
-3. Identify the nodes with the role **worker, worker-gpu** are Ready.
+image::exploring-login.png[OpenShift Login, width=100%]
 
-image::nodes.png[OpenShift Nodes, width=100%]
+Once you are logged in, click on the `Home -> Projects` tab on the left side of the console to view all the namespaces on the cluster:
 
-=== Accessing OpenShift AI
-The OpenShift AI console is accessible via the OpenShift web console. You can log in using the same credentials used to login to the OpenShift environment to access the OpenShift AI.
+image::exploring-projects.png[OpenShift Projects, width=50%]
 
-Locate the OpenShift Route for the OpenShift AI console by performing the following steps:
+Search and select the `llama-serve` namespace, this is the namespace where all the lab components have been deployed.
 
-1. In the OpenShift web console, navigate to **Networking** > **Routes**.
-2. Filter the list of routes by specifying the Name **rhods**
-3. Click on the URL link to access the OpenShift AI console.
-4. Log in using the same credentials used to log in to the OpenShift environment.
+image::exploring-namespace.png[OpenShift Namespace, width=100%]
 
-=== Model serving
-Two models are available for serving in the lab environment:
+To view the pods running on the `llama-serve` namespace
 
-* Granite 3.2 8B
-* Llama 3.2 3B
+Click on `Workloads -> Pods` to view all the components deployed and running as pods for this lab:
 
-The image below shows the model serving status in the OpenShift AI console.
+image::exploring-pods.png[OpenShift Pods, width=50%]
 
-image::model-deploys.png[Model Deployments, width=100%]
+You should see the following pods running, each of which correspond to a specific component required for the lab:
 
-These models and their status can be viewed in the OpenShift AI console. Perform the following steps to view the models:
+image::exploring-pods-list.png[OpenShift Pods List, width=100%]
 
-1. In the OpenShift AI console, navigate to **Models** > **Model Deployments**.
-2. Look for a green check mark next to the model name. This indicates that the model is successfully deployed and ready for use.
+== Red Hat OpenShift AI Console
 
-The models have already been defined within the Llama Stack configuration so that they are ready to be used by the Workbench.
+To view the models running on Openshift AI, click on the `Red Hat OpenShift AI` application as shown below:
 
-=== Accessing the Workbench
-The Workbench is a collaborative environment that allows you to interact with the Llama Stack instance and interact with various AI tools including MCP.
-To access the Workbench, perform the following steps:
+image::exploring-RHOAI.png[RHOAI page, width=100%]
 
-1. In the OpenShift AI console, navigate to **Data science projects**
-2. Click on the **llama-serve** project
-3. Click on the **Workbench** tab
-4. Click on the blue **Lab** button which will open a new tab in your browser to the notebook server
+Navigate to the `Model deployments` tab that is located on the left hand side:
 
-image::workbench.png[Workbench, width=100%]
+image::exploring-models.png[OpenShift Models, width=100%]
 
-You are now ready to start using the Workbench and explore the capabilities of LlamaStack and OpenShift AI. The Workbench provides a Jupyter-like interface where you can create and run notebooks, access data, and interact with the deployed models.
+You will see two models running via the RHOAI vLLM ServingRuntime:
+
+* granite3.2-8b
+* llama3.2-3b
+
+=== Jupyter Notebook Workbench
+
+To launch the Jupyter notebook workbench, please follow the steps as shown below:
+
+Your Jupyter workbench can be found in `Data science projects` (located on the left hand side of the console). Select the project `llama-serve`:
+
+image::exploring-RHOAI-DS-Projects.png[RHOAI DS Projects, width=100%]
+
+Once you have selected `llama-serve` as the data science project, you will see a `workbenches` tab as shown below:
+
+image::exploring-RHOAI-llama-serve.png[RHOAI Llama Serve, width=100%]
+
+Click on the blue arrow next to "lab" to access the Jupyter workbench. You will need to sign in again with your username and password. Upon opening this workbench, you'll find a list of interactive notebooks that will walk you through different Llama Stack demos.
+
+Now let’s start running these notebooks!
